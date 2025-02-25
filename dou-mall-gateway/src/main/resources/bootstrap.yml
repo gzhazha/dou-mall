@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: @project.artifactId@
+  cloud:
+    nacos:
+      config:
+        server-addr: @nacos.server-addr@
+        namespace: @nacos.namespace@
+        file-extension: yml
+      discovery:
+        server-addr: ${spring.cloud.nacos.config.server-addr}
+        namespace: ${spring.cloud.nacos.config.namespace}

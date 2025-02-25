@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: dou-mall-user
+          uri: lb://dou-mall-user
+          predicates:
+            - Path=/user/**
