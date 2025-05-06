@@ -1,2 +1,16 @@
 server:
-  port: 9000
+  port: 10000
+
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: dou-mall-auth
+          uri: lb://dou-mall-auth
+          predicates:
+            - Path=/auth/**
+        - id: dou-mall-user
+          uri: lb://dou-mall-user
+          predicates:
+            - Path=/user/**

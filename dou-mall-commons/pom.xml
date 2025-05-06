@@ -15,6 +15,10 @@
         <module>dou-mall-common-swagger</module>
         <module>dou-mall-common-base</module>
         <module>dou-mall-common-trace</module>
+        <module>dou-mall-common-db</module>
+        <module>dou-mall-common-cache</module>
+        <module>dou-mall-common-feign</module>
+        <module>dou-mall-common-security</module>
     </modules>
 
 

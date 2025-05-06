@@ -1,14 +1,18 @@
 package com.open.mall.auth.controller;
 
-import com.open.mall.api.auth.dto.LoginDto;
-import com.open.mall.api.auth.feign.AuthFeignClient;
-import com.open.mall.api.auth.vo.TokenInfo;
+import com.open.mall.api.auth.domain.bo.UserInfoInTokenBo;
+import com.open.mall.api.auth.domain.dto.CaptchaLoginDto;
+import com.open.mall.api.auth.domain.dto.PasswordLoginDto;
+import com.open.mall.api.auth.domain.vo.TokenInfoVo;
+import com.open.mall.auth.service.TokenService;
 import com.open.mall.common.base.domain.vo.BaseResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * TokenController
@@ -19,19 +23,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "token接口")
 @RestController
+@Validated
+@RequiredArgsConstructor
 @RequestMapping("/token")
-public class TokenController implements AuthFeignClient {
+public class TokenController {
+
+    private final TokenService tokenService;
 
     @Operation(summary = "获取token接口", method = "POST")
-    @Override
-    public BaseResult<TokenInfo> getOrCreateToken(LoginDto loginDto) {
-        return null;
+    @PostMapping("/login/captcha")
+    public BaseResult<TokenInfoVo> loginByCaptcha(@RequestBody CaptchaLoginDto captchaLoginDto) {
+        return BaseResult.success(tokenService.buildTokenInfo(captchaLoginDto));
+    }
+
+    @Operation(summary = "获取token接口", method = "POST")
+    @PostMapping("/login/password")
+    public BaseResult<TokenInfoVo> loginByCaptcha(@RequestBody PasswordLoginDto passwordLoginDto) {
+        return BaseResult.success(tokenService.buildTokenInfo(passwordLoginDto));
     }
 
     @Operation(summary = "校验token接口", method = "GET")
-    @Override
-    public BaseResult<TokenInfo> checkToken(@Parameter(name = "token") String token) {
-        return null;
+    @GetMapping("/check")
+    public BaseResult<UserInfoInTokenBo> checkToken(@Parameter(name = "token") String token) {
+        return BaseResult.success(tokenService.checkToken(token));
     }
 
 }

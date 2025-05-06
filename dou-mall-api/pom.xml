@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>dou-mall-api-auth</module>
+        <module>dou-mall-api-user</module>
     </modules>
 
 </project>

@@ -11,11 +11,12 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum ErrorEnum implements ResultCode{
+public enum ErrorEnum implements ErrorCode {
     UNKNOWN_ERROR(10000,"未知错误"),
     SYSTEM_ERROR(10001,"系统错误"),
     ILLEGAL_REQUEST(10002,"非法请求"),
     ILLEGAL_PARAM(10040,"参数错误"),
+    SYSTEM_INTERNAL_ERROR(10050,"内部系统错误"),
     ;
 
     private final Integer code;

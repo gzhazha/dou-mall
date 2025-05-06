@@ -36,7 +36,32 @@
         </dependency>
         <dependency>
             <groupId>com.open.mall</groupId>
+            <artifactId>dou-mall-api-user</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.open.mall</groupId>
             <artifactId>dou-mall-common-trace</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.open.mall</groupId>
+            <artifactId>dou-mall-common-db</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.open.mall</groupId>
+            <artifactId>dou-mall-common-cache</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.open.mall</groupId>
+            <artifactId>dou-mall-common-feign</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.open.mall</groupId>
+            <artifactId>dou-mall-common-security</artifactId>
             <version>${revision}</version>
         </dependency>
 
@@ -60,19 +85,19 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-crypto</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
-        <finalName>${project.name}</finalName>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <parameters>true</parameters>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

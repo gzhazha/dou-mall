@@ -18,8 +18,9 @@
             <version>${revision}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>com.open.mall</groupId>
+            <artifactId>dou-mall-common-feign</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 

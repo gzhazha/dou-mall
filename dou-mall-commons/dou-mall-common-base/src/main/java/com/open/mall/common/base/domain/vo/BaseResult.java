@@ -1,7 +1,7 @@
 package com.open.mall.common.base.domain.vo;
 
+import com.open.mall.common.base.enums.ErrorCode;
 import com.open.mall.common.base.enums.ErrorEnum;
-import com.open.mall.common.base.enums.ResultCode;
 import com.open.mall.common.base.enums.ResultEnum;
 import io.micrometer.common.util.StringUtils;
 import lombok.AllArgsConstructor;
@@ -56,13 +56,13 @@ public class BaseResult<T> {
         return new BaseResult<T>(ResultEnum.FAIL).handleParamError(result);
     }
 
-    public static <T> BaseResult<T> failure(ResultCode resultCode) {
+    public static <T> BaseResult<T> failure(ErrorCode resultCode) {
         BaseResult<T> result = new BaseResult<>(resultCode);
         result.build();
         return result;
     }
 
-    public static <T> BaseResult<T> of(ResultCode resultCode) {
+    public static <T> BaseResult<T> of(ErrorCode resultCode) {
         BaseResult<T> result = new BaseResult<>();
         result.setCode(resultCode.getCode());
         result.setMsg(resultCode.getMsg());
@@ -75,7 +75,7 @@ public class BaseResult<T> {
     }
 
 
-    public BaseResult(ResultCode resultCode) {
+    public BaseResult(ErrorCode resultCode) {
         this.code = resultCode.getCode();
         this.msg = resultCode.getMsg();
     }

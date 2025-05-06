@@ -12,18 +12,20 @@
     <artifactId>dou-mall-common-swagger</artifactId>
 
     <dependencies>
-        <!--接口文档-->
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-webmvc-core</artifactId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-security</artifactId>
+            <artifactId>springdoc-openapi-webmvc-core</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
+            <version>${swagger.core.version}</version>
         </dependency>
     </dependencies>
 

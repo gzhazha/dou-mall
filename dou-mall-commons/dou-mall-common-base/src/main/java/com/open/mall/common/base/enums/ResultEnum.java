@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum ResultEnum implements ResultCode{
+public enum ResultEnum implements ErrorCode {
     SUCCESS(1,"success"),
     FAIL(0,"fail"),
     ;

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.open.mall.user.dao.mapper.UserInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.open.mall.user.domain.po.UserInfo">
+            <id property="userId" column="user_id" jdbcType="VARCHAR"/>
+            <result property="username" column="username" jdbcType="VARCHAR"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="phoneNumber" column="phone_number" jdbcType="VARCHAR"/>
+            <result property="emailVerified" column="email_verified" jdbcType="TINYINT"/>
+            <result property="phoneVerified" column="phone_verified" jdbcType="TINYINT"/>
+            <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+            <result property="avatarUrl" column="avatar_url" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="SMALLINT"/>
+            <result property="registrationIp" column="registration_ip" jdbcType="VARCHAR"/>
+            <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+            <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+            <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id,username,email,
+        phone_number,email_verified,phone_verified,
+        nickname,avatar_url,status,
+        registration_ip,created_at,updated_at,
+        deleted_at
+    </sql>
+</mapper>

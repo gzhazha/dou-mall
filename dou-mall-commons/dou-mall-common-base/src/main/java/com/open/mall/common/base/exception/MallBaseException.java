@@ -1,6 +1,6 @@
 package com.open.mall.common.base.exception;
 
-import com.open.mall.common.base.enums.ResultCode;
+import com.open.mall.common.base.enums.ErrorCode;
 import lombok.Getter;
 
 /**
@@ -11,29 +11,29 @@ import lombok.Getter;
  */
 
 @Getter
-public class MallBaseException extends Exception {
-    private ResultCode resultCode;
+public class MallBaseException extends RuntimeException {
+    private ErrorCode resultCode;
     private String msg;
 
-    public MallBaseException(ResultCode resultCode) {
+    public MallBaseException(ErrorCode resultCode) {
         super(resultCode.getMsg());
         this.resultCode = resultCode;
         this.msg = resultCode.getMsg();
     }
 
-    public MallBaseException(ResultCode resultCode, Throwable cause) {
+    public MallBaseException(ErrorCode resultCode, Throwable cause) {
         super(resultCode.getMsg(), cause);
         this.resultCode = resultCode;
         this.msg = resultCode.getMsg();
     }
 
-    public MallBaseException(ResultCode resultCode, String msg) {
+    public MallBaseException(ErrorCode resultCode, String msg) {
         super(msg);
         this.resultCode = resultCode;
         this.msg = msg;
     }
 
-    public MallBaseException(ResultCode resultCode, String msg, Throwable cause) {
+    public MallBaseException(ErrorCode resultCode, String msg, Throwable cause) {
         super(msg, cause);
         this.resultCode = resultCode;
         this.msg = msg;

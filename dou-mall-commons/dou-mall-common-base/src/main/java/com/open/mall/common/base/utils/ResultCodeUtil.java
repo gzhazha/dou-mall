@@ -1,7 +1,7 @@
 package com.open.mall.common.base.utils;
 
 import com.open.mall.common.base.enums.ErrorEnum;
-import com.open.mall.common.base.enums.ResultCode;
+import com.open.mall.common.base.enums.ErrorCode;
 import lombok.experimental.UtilityClass;
 
 /**
@@ -12,8 +12,8 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class ResultCodeUtil {
-    public static ResultCode handle(Throwable e) {
-        ResultCode error = ErrorEnum.UNKNOWN_ERROR;
+    public static ErrorCode handle(Throwable e) {
+        ErrorCode error = ErrorEnum.UNKNOWN_ERROR;
         String exceptionName = e.getClass().getName();
         if (exceptionName.contains(".sql.")) {
             error = ErrorEnum.SYSTEM_ERROR;

@@ -1,7 +1,7 @@
 package com.open.mall.common.base.api.handler;
 
 import com.open.mall.common.base.domain.vo.BaseResult;
-import com.open.mall.common.base.enums.ResultCode;
+import com.open.mall.common.base.enums.ErrorCode;
 import com.open.mall.common.base.exception.MallBaseException;
 import com.open.mall.common.base.utils.ResultCodeUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +57,7 @@ public class GlobalExceptionHandler {
         if (StringUtils.containsIgnoreCase(ExceptionUtils.getRootCauseMessage(ex), "Broken pipe")) {
             return null;
         }
-        ResultCode error = ResultCodeUtil.handle(ex);
+        ErrorCode error = ResultCodeUtil.handle(ex);
         return BaseResult.failure(error);
     }
 
@@ -66,7 +66,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public BaseResult<Void> exceptionHandler(MallBaseException ex) {
         log.error("", ex);
-        ResultCode error = ex.getResultCode();
+        ErrorCode error = ex.getResultCode();
         return BaseResult.failure(error);
     }
 }
