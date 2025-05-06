@@ -3,7 +3,7 @@ package com.open.mall.common.base.api.handler;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.json.JSONUtil;
 import com.open.mall.common.base.domain.vo.BaseResult;
-import com.open.mall.common.base.enums.ErrorEnum;
+import com.open.mall.common.base.enums.SystemError;
 import com.open.mall.common.base.exception.MallBaseException;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +45,7 @@ public class MallHttpHandler {
 		}
 		catch (IOException e) {
             log.error("堆栈：",e);
-			throw new MallBaseException(ErrorEnum.SYSTEM_ERROR,"io 异常");
+			throw new MallBaseException(SystemError.SYSTEM_ERROR,"io 异常");
 		}
 	}
 

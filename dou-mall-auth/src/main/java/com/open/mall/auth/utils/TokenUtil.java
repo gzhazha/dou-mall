@@ -6,7 +6,7 @@ import com.open.mall.api.auth.domain.vo.TokenInfoVo;
 import com.open.mall.auth.dao.manager.RefreshTokenManager;
 import com.open.mall.auth.domain.bo.TokenInfoBo;
 import com.open.mall.auth.enums.TokenType;
-import com.open.mall.common.base.enums.AuthErrorEnum;
+import com.open.mall.common.base.enums.AuthError;
 import com.open.mall.common.base.utils.MallAssert;
 import com.open.mall.common.cache.constant.AuthCacheName;
 import com.open.mall.common.cache.utils.RedisUtil;
@@ -134,7 +134,7 @@ public class TokenUtil {
      */
     public static UserInfoInTokenBo verifyAccessToken(String token) {
         TokenVerifyResult result = verifyToken(token, TokenType.ACCESS_TOKEN);
-        MallAssert.isTrue(result.isValid(),AuthErrorEnum.ACCESS_CODE_LOGIN_ERROR);
+        MallAssert.isTrue(result.isValid(), AuthError.ACCESS_CODE_LOGIN_ERROR);
         UserInfoInTokenBo userInfoInTokenBo = new UserInfoInTokenBo();
         userInfoInTokenBo.setToken(token);
         userInfoInTokenBo.setUserId(result.getUserId());
@@ -220,7 +220,7 @@ public class TokenUtil {
      */
     public static TokenInfoVo refreshAccessToken(String refreshToken) {
         TokenVerifyResult  result= verifyRefreshToken(refreshToken);
-        MallAssert.isTrue(result.isValid(), AuthErrorEnum.REFRESH_CODE_LOGIN_ERROR);
+        MallAssert.isTrue(result.isValid(), AuthError.REFRESH_CODE_LOGIN_ERROR);
 
         // 移除旧的刷新Token
         invalidateToken(result.getTokenId(), TokenType.REFRESH_TOKEN);

@@ -1,6 +1,6 @@
 package com.open.mall.common.base.utils;
 
-import com.open.mall.common.base.enums.ErrorEnum;
+import com.open.mall.common.base.enums.SystemError;
 import com.open.mall.common.base.enums.ErrorCode;
 import lombok.experimental.UtilityClass;
 
@@ -13,13 +13,13 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ResultCodeUtil {
     public static ErrorCode handle(Throwable e) {
-        ErrorCode error = ErrorEnum.UNKNOWN_ERROR;
+        ErrorCode error = SystemError.UNKNOWN_ERROR;
         String exceptionName = e.getClass().getName();
         if (exceptionName.contains(".sql.")) {
-            error = ErrorEnum.SYSTEM_ERROR;
+            error = SystemError.SYSTEM_ERROR;
         }
         if (exceptionName.contains(".http.") || exceptionName.contains(".web.")) {
-            error = ErrorEnum.ILLEGAL_REQUEST;
+            error = SystemError.ILLEGAL_REQUEST;
         }
         return error;
     }

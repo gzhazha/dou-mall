@@ -8,7 +8,7 @@ import com.open.mall.api.auth.enums.CaptchaChannel;
 import com.open.mall.auth.manager.send.CaptchaSender;
 import com.open.mall.auth.service.CaptchaService;
 import com.open.mall.auth.utils.CaptchaUtil;
-import com.open.mall.common.base.enums.ErrorEnum;
+import com.open.mall.common.base.enums.SystemError;
 import com.open.mall.common.base.exception.MallBaseException;
 import com.open.mall.common.base.utils.MallAssert;
 import com.open.mall.common.base.utils.WebUtil;
@@ -48,7 +48,7 @@ public class CaptchaServiceImpl implements CaptchaService {
     public void sendCaptcha(SendCaptchaDto sendCaptchaDto) {
         // 获取发送渠道
         CaptchaSender sender = Optional.ofNullable(captchaSenderMap.get(sendCaptchaDto.getChannel()))
-                .orElseThrow(() -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, "不支持的发送渠道"));
+                .orElseThrow(() -> new MallBaseException(SystemError.ILLEGAL_PARAM, "不支持的发送渠道"));
         
         // 验证标识符格式
         MallAssert.isTrue(sender.checkIdentifier(sendCaptchaDto.getIdentifier()), "identifier格式错误");
@@ -78,7 +78,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 
     @Override
     public CaptchaStatusVo getCaptchaStatus(String identifier) {
-        MallAssert.isFalse(StringUtils.isBlank(identifier), ErrorEnum.ILLEGAL_PARAM, "标识符不能为空");
+        MallAssert.isFalse(StringUtils.isBlank(identifier), SystemError.ILLEGAL_PARAM, "标识符不能为空");
         
         // 检查是否存在验证码
         boolean hasCaptcha = CaptchaUtil.hasCaptcha(identifier);

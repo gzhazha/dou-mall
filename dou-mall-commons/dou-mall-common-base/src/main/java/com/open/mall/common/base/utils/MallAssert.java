@@ -1,7 +1,7 @@
 package com.open.mall.common.base.utils;
 
 import com.open.mall.common.base.enums.ErrorCode;
-import com.open.mall.common.base.enums.ErrorEnum;
+import com.open.mall.common.base.enums.SystemError;
 import com.open.mall.common.base.exception.MallBaseException;
 
 import java.util.Collection;
@@ -57,7 +57,7 @@ public class MallAssert {
      * @throws MallBaseException 如果表达式为假，则抛出系统异常
      */
     public static void isTrue(boolean expression, String message) throws MallBaseException {
-        isTrue(expression, () -> new MallBaseException(ErrorEnum.SYSTEM_ERROR, message));
+        isTrue(expression, () -> new MallBaseException(SystemError.SYSTEM_ERROR, message));
     }
     
     /**
@@ -91,7 +91,7 @@ public class MallAssert {
      * @throws MallBaseException 如果表达式为真，则抛出系统异常
      */
     public static void isFalse(boolean expression, String message) throws MallBaseException {
-        isFalse(expression, () -> new MallBaseException(ErrorEnum.SYSTEM_ERROR, message));
+        isFalse(expression, () -> new MallBaseException(SystemError.SYSTEM_ERROR, message));
     }
     
     /**
@@ -139,7 +139,7 @@ public class MallAssert {
      * @throws MallBaseException 如果对象为空，则抛出系统异常
      */
     public static void notNull(Object object, String message) throws MallBaseException {
-        notNull(object, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        notNull(object, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -187,7 +187,7 @@ public class MallAssert {
      * @throws MallBaseException 如果对象不为空，则抛出系统异常
      */
     public static void isNull(Object object, String message) throws MallBaseException {
-        isNull(object, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        isNull(object, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -235,7 +235,7 @@ public class MallAssert {
      * @throws MallBaseException 如果字符串为空白，则抛出系统异常
      */
     public static void notBlank(String text, String message) throws MallBaseException {
-        notBlank(text, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        notBlank(text, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -283,7 +283,7 @@ public class MallAssert {
      * @throws MallBaseException 如果字符串不为空白，则抛出系统异常
      */
     public static void isBlank(String text, String message) throws MallBaseException {
-        isBlank(text, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        isBlank(text, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -331,7 +331,7 @@ public class MallAssert {
      * @throws MallBaseException 如果字符串为空，则抛出系统异常
      */
     public static void notEmpty(String text, String message) throws MallBaseException {
-        notEmpty(text, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        notEmpty(text, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -379,7 +379,7 @@ public class MallAssert {
      * @throws MallBaseException 如果集合为空，则抛出系统异常
      */
     public static void notEmpty(Collection<?> collection, String message) throws MallBaseException {
-        notEmpty(collection, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        notEmpty(collection, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -427,7 +427,7 @@ public class MallAssert {
      * @throws MallBaseException 如果Map为空，则抛出系统异常
      */
     public static void notEmpty(Map<?, ?> map, String message) throws MallBaseException {
-        notEmpty(map, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        notEmpty(map, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -475,7 +475,7 @@ public class MallAssert {
      * @throws MallBaseException 如果数组为空，则抛出系统异常
      */
     public static void notEmpty(Object[] array, String message) throws MallBaseException {
-        notEmpty(array, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        notEmpty(array, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -525,7 +525,7 @@ public class MallAssert {
      * @throws MallBaseException 如果对象不相等，则抛出系统异常
      */
     public static void equals(Object expected, Object actual, String message) throws MallBaseException {
-        equals(expected, actual, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        equals(expected, actual, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -577,7 +577,7 @@ public class MallAssert {
      * @throws MallBaseException 如果对象相等，则抛出系统异常
      */
     public static void notEquals(Object unexpected, Object actual, String message) throws MallBaseException {
-        notEquals(unexpected, actual, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        notEquals(unexpected, actual, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -631,7 +631,7 @@ public class MallAssert {
      * @throws MallBaseException 如果数值小于等于指定值，则抛出系统异常
      */
     public static void greaterThan(Number value, Number min, String message) throws MallBaseException {
-        greaterThan(value, min, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        greaterThan(value, min, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -685,7 +685,7 @@ public class MallAssert {
      * @throws MallBaseException 如果数值小于指定值，则抛出系统异常
      */
     public static void greaterThanOrEqual(Number value, Number min, String message) throws MallBaseException {
-        greaterThanOrEqual(value, min, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        greaterThanOrEqual(value, min, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -739,7 +739,7 @@ public class MallAssert {
      * @throws MallBaseException 如果数值大于等于指定值，则抛出系统异常
      */
     public static void lessThan(Number value, Number max, String message) throws MallBaseException {
-        lessThan(value, max, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        lessThan(value, max, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -781,7 +781,7 @@ public class MallAssert {
      * @throws MallBaseException 如果数值大于指定值，则抛出系统异常
      */
     public static void lessThanOrEqual(Number value, Number max, String message) throws MallBaseException {
-        lessThanOrEqual(value, max, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        lessThanOrEqual(value, max, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**
@@ -826,7 +826,7 @@ public class MallAssert {
      * @throws MallBaseException 如果数值不在指定范围内，则抛出系统异常
      */
     public static void between(Number value, Number min, Number max, String message) throws MallBaseException {
-        between(value, min, max, () -> new MallBaseException(ErrorEnum.ILLEGAL_PARAM, message));
+        between(value, min, max, () -> new MallBaseException(SystemError.ILLEGAL_PARAM, message));
     }
     
     /**

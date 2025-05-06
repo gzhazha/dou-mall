@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum AuthErrorEnum implements ErrorCode {
+public enum AuthError implements ErrorCode {
     //-------验证码
     UNSUPPORTED_ACCOUNT_TYPES(20001,"不支持的账户类型"),
     VERIFICATION_CODE_HAS_EXPIRED(20002,"验证码已失效"),

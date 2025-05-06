@@ -1,6 +1,6 @@
 package com.open.mall.api.user.enums;
 
-import com.open.mall.common.base.enums.ErrorEnum;
+import com.open.mall.common.base.enums.SystemError;
 import com.open.mall.common.base.exception.MallBaseException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -85,6 +85,6 @@ public enum UserStatus {
      */
     public static UserStatus fromStatus(Integer status) {
         return findByStatus(status)
-                .orElseThrow(() -> new MallBaseException(ErrorEnum.SYSTEM_ERROR,"未知的用户状态"+status));
+                .orElseThrow(() -> new MallBaseException(SystemError.SYSTEM_ERROR,"未知的用户状态"+status));
     }
 }

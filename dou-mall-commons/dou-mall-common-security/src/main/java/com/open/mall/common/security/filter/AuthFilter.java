@@ -4,8 +4,8 @@ import com.open.mall.api.auth.domain.bo.UserInfoInTokenBo;
 import com.open.mall.api.auth.feign.TokenFeignClient;
 import com.open.mall.common.base.api.handler.MallHttpHandler;
 import com.open.mall.common.base.domain.vo.BaseResult;
-import com.open.mall.common.base.enums.AuthErrorEnum;
-import com.open.mall.common.base.enums.ErrorEnum;
+import com.open.mall.common.base.enums.AuthError;
+import com.open.mall.common.base.enums.SystemError;
 import com.open.mall.common.security.AuthUserContext;
 import com.open.mall.common.security.adapter.AuthPathAdapter;
 import jakarta.servlet.*;
@@ -62,13 +62,13 @@ public class AuthFilter implements Filter {
 
         String token = getAuthorization(req);
         if(StringUtils.isBlank(token)) {
-            mallHttpHandler.printServerResponseToWeb(BaseResult.failure(AuthErrorEnum.ACCESS_CODE_LOGIN_ERROR));
+            mallHttpHandler.printServerResponseToWeb(BaseResult.failure(AuthError.ACCESS_CODE_LOGIN_ERROR));
             return;
         }
         // 校验token
         BaseResult<UserInfoInTokenBo> tokenCheckBoBaseResult = tokenFeignClient.checkToken(token);
         if(tokenCheckBoBaseResult == null || !tokenCheckBoBaseResult.getSuccess()){
-            mallHttpHandler.printServerResponseToWeb(BaseResult.failure(ErrorEnum.SYSTEM_INTERNAL_ERROR));
+            mallHttpHandler.printServerResponseToWeb(BaseResult.failure(SystemError.SYSTEM_INTERNAL_ERROR));
             return;
         }
         UserInfoInTokenBo userInfoInTokenBo = tokenCheckBoBaseResult.getData();

@@ -1,7 +1,7 @@
 package com.open.mall.auth.utils;
 
-import com.open.mall.common.base.enums.AuthErrorEnum;
-import com.open.mall.common.base.enums.ErrorEnum;
+import com.open.mall.common.base.enums.AuthError;
+import com.open.mall.common.base.enums.SystemError;
 import com.open.mall.common.base.utils.MallAssert;
 import com.open.mall.common.cache.constant.AuthCacheName;
 import com.open.mall.common.cache.utils.RedisUtil;
@@ -239,22 +239,22 @@ public class CaptchaUtil {
      */
     public static String createAndStoreCaptcha(String identifier, String ip, int length, CaptchaMode mode, int expireSeconds) {
         // 检查手机号格式
-        MallAssert.isTrue(isValidMobile(identifier), ErrorEnum.ILLEGAL_PARAM, "手机号格式不正确");
+        MallAssert.isTrue(isValidMobile(identifier), SystemError.ILLEGAL_PARAM, "手机号格式不正确");
         
         // 检查发送频率限制
-        MallAssert.isTrue(checkSendRateLimit(identifier), AuthErrorEnum.VERIFICATION_CODE_SEND_TOO_FREQUENTLY);
+        MallAssert.isTrue(checkSendRateLimit(identifier), AuthError.VERIFICATION_CODE_SEND_TOO_FREQUENTLY);
         
         // 检查每日发送次数限制
-        MallAssert.isTrue(checkDailyLimit(identifier), AuthErrorEnum.VERIFICATION_CODE_DAILY_LIMIT_EXCEEDED);
+        MallAssert.isTrue(checkDailyLimit(identifier), AuthError.VERIFICATION_CODE_DAILY_LIMIT_EXCEEDED);
         
         // 检查IP每日发送次数限制
         if (StringUtils.isNotBlank(ip)) {
-            MallAssert.isTrue(checkIpDailyLimit(ip), AuthErrorEnum.VERIFICATION_CODE_IP_LIMIT_EXCEEDED);
+            MallAssert.isTrue(checkIpDailyLimit(ip), AuthError.VERIFICATION_CODE_IP_LIMIT_EXCEEDED);
         }
 
         String captcha = createCaptcha(length, mode);
         boolean stored = storeCaptcha(identifier, captcha, expireSeconds);
-        MallAssert.isTrue(stored, ErrorEnum.SYSTEM_ERROR, "验证码存储失败");
+        MallAssert.isTrue(stored, SystemError.SYSTEM_ERROR, "验证码存储失败");
         
         // 设置发送频率限制
         setRateLimit(identifier, DEFAULT_RATE_LIMIT_SECONDS);
@@ -295,21 +295,21 @@ public class CaptchaUtil {
      * @param deleteAfter 验证成功后是否删除验证码
      */
     public static void validateCaptcha(String identifier, String captcha, boolean deleteAfter) {
-        MallAssert.isFalse(StringUtils.isAnyBlank(identifier, captcha), ErrorEnum.ILLEGAL_PARAM, "验证码或标识符格式错误");
+        MallAssert.isFalse(StringUtils.isAnyBlank(identifier, captcha), SystemError.ILLEGAL_PARAM, "验证码或标识符格式错误");
         
         // 检查尝试次数
         checkVerifyAttempts(identifier);
         
         String key = buildCaptchaKey(identifier);
         String storedCaptcha = RedisUtil.get(key);
-        MallAssert.notNull(storedCaptcha, AuthErrorEnum.VERIFICATION_CODE_HAS_EXPIRED);
+        MallAssert.notNull(storedCaptcha, AuthError.VERIFICATION_CODE_HAS_EXPIRED);
         
         boolean isValid = captcha.equalsIgnoreCase(storedCaptcha);
         
         if (!isValid) {
             // 增加验证尝试次数
             incrementVerifyAttempts(identifier);
-            MallAssert.isTrue(false, AuthErrorEnum.VERIFICATION_CODE_MISMATCH);
+            MallAssert.isTrue(false, AuthError.VERIFICATION_CODE_MISMATCH);
         }
         
         if (deleteAfter) {
@@ -514,7 +514,7 @@ public class CaptchaUtil {
         if (StringUtils.isNotBlank(attemptsStr)) {
             int attempts = Integer.parseInt(attemptsStr);
             MallAssert.isTrue(attempts < DEFAULT_MAX_VERIFY_ATTEMPTS, 
-                    AuthErrorEnum.VERIFICATION_CODE_MAX_ATTEMPTS_EXCEEDED);
+                    AuthError.VERIFICATION_CODE_MAX_ATTEMPTS_EXCEEDED);
         }
     }
     

@@ -1,8 +1,8 @@
 package com.open.mall.common.base.domain.vo;
 
 import com.open.mall.common.base.enums.ErrorCode;
-import com.open.mall.common.base.enums.ErrorEnum;
-import com.open.mall.common.base.enums.ResultEnum;
+import com.open.mall.common.base.enums.SystemError;
+import com.open.mall.common.base.enums.ResultCode;
 import io.micrometer.common.util.StringUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,12 +23,12 @@ public class BaseResult<T> {
     /**
      * 响应码
      */
-    private Integer code = ResultEnum.SUCCESS.getCode();
+    private Integer code = ResultCode.SUCCESS.getCode();
 
     /**
      * 说明
      */
-    private String msg = ResultEnum.SUCCESS.getMsg();
+    private String msg = ResultCode.SUCCESS.getMsg();
 
     /**
      * 链路追踪
@@ -41,19 +41,19 @@ public class BaseResult<T> {
     private T data;
 
     public static <T> BaseResult<T> success(T result) {
-        return new BaseResult<T>(ResultEnum.SUCCESS).setResult(result);
+        return new BaseResult<T>(ResultCode.SUCCESS).setResult(result);
     }
 
     public static <T> BaseResult<T> failure() {
-        return new BaseResult<T>(ResultEnum.FAIL).setNullResult();
+        return new BaseResult<T>(ResultCode.FAIL).setNullResult();
     }
 
     public static <T> BaseResult<T> success() {
-        return new BaseResult<T>(ResultEnum.SUCCESS).setNullResult();
+        return new BaseResult<T>(ResultCode.SUCCESS).setNullResult();
     }
 
     public static <T> BaseResult<T> failure(BindingResult result) {
-        return new BaseResult<T>(ResultEnum.FAIL).handleParamError(result);
+        return new BaseResult<T>(ResultCode.FAIL).handleParamError(result);
     }
 
     public static <T> BaseResult<T> failure(ErrorCode resultCode) {
@@ -71,7 +71,7 @@ public class BaseResult<T> {
     }
 
     public boolean getSuccess() {
-        return ResultEnum.SUCCESS.getCode().equals(code);
+        return ResultCode.SUCCESS.getCode().equals(code);
     }
 
 
@@ -117,7 +117,7 @@ public class BaseResult<T> {
     }
 
     private void build() {
-        if (this.getCode() == ResultEnum.SUCCESS.getCode()) {
+        if (this.getCode() == ResultCode.SUCCESS.getCode()) {
 //            handleResult();
         }
 //        setTraceId(TraceContext.getTraceId());
@@ -128,10 +128,10 @@ public class BaseResult<T> {
             ObjectError error = result.getAllErrors().get(0);
             String errorMsg = error.getDefaultMessage();
             if (StringUtils.isNotBlank(errorMsg) && errorMsg.toLowerCase().contains(Exception.class.getSimpleName().toLowerCase())) {
-                errorMsg = ErrorEnum.ILLEGAL_PARAM.getMsg();
+                errorMsg = SystemError.ILLEGAL_PARAM.getMsg();
             }
             setMsg(errorMsg);
-            setCode(ErrorEnum.ILLEGAL_PARAM.getCode());
+            setCode(SystemError.ILLEGAL_PARAM.getCode());
         }
     }
 

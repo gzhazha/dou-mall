@@ -15,8 +15,8 @@ import com.open.mall.auth.service.TokenService;
 import com.open.mall.auth.utils.CaptchaUtil;
 import com.open.mall.auth.utils.TokenUtil;
 import com.open.mall.common.base.domain.vo.BaseResult;
-import com.open.mall.common.base.enums.AuthErrorEnum;
-import com.open.mall.common.base.enums.ErrorEnum;
+import com.open.mall.common.base.enums.AuthError;
+import com.open.mall.common.base.enums.SystemError;
 import com.open.mall.common.base.exception.MallBaseException;
 import com.open.mall.common.base.utils.MallAssert;
 import lombok.RequiredArgsConstructor;
@@ -56,7 +56,7 @@ public class TokenServiceImpl implements TokenService {
         } else if (CaptchaChannel.MOBILE.equals(channel)) {
             loginType = LoginType.MOBILE;
         } else {
-            throw new MallBaseException(ErrorEnum.ILLEGAL_PARAM, "不存在的验证码登录渠道");
+            throw new MallBaseException(SystemError.ILLEGAL_PARAM, "不存在的验证码登录渠道");
         }
         UserInfoBo userInfoBo = getUserInfoBo(loginType, captchaLoginDto.getIdentifier());
         return buildTokenInfoVo(userInfoBo);
@@ -80,7 +80,7 @@ public class TokenServiceImpl implements TokenService {
     }
 
     private TokenInfoVo buildTokenInfoVo(UserInfoBo userInfoBo) {
-        MallAssert.notNull(userInfoBo, AuthErrorEnum.NO_USER_INFORMATION);
+        MallAssert.notNull(userInfoBo, AuthError.NO_USER_INFORMATION);
         Integer status = userInfoBo.getStatus();
         UserStatus userStatus = UserStatus.fromStatus(status);
         Long userId = userInfoBo.getUserId();
