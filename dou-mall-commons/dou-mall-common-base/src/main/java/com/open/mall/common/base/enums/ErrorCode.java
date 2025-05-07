@@ -31,7 +31,7 @@ public interface ErrorCode {
         int code = getCode();
         if (code >= 10000 && code < 20000) {
             return ErrorType.SYSTEM;
-        } else if (code >= 20000 && code < 30000) {
+        } else if ((code >= 20000 && code < 30000) || (code > -500 && code < -400)) {
             return ErrorType.AUTH;
         } else if (code >= 30000 && code < 40000) {
             return ErrorType.USER;

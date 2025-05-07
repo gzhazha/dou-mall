@@ -72,8 +72,12 @@ public class AuthFilter implements Filter {
             return;
         }
         UserInfoInTokenBo userInfoInTokenBo = tokenCheckBoBaseResult.getData();
-        AuthUserContext.set(userInfoInTokenBo);
-        filterChain.doFilter(req, resp);
+        try {
+            AuthUserContext.set(userInfoInTokenBo);
+            filterChain.doFilter(req, resp);
+        } finally {
+            AuthUserContext.clean();
+        }
     }
 
     private String getAuthorization(HttpServletRequest request) {

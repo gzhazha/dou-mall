@@ -14,14 +14,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Lazy(value = false)
-public class SpringContextUtil implements ApplicationContextAware {
+public class SpringContextHolder implements ApplicationContextAware {
 
     public static ApplicationContext applicationContext;
 
     @SuppressWarnings("NullableProblems")
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        SpringContextUtil.applicationContext = applicationContext;
+        SpringContextHolder.applicationContext = applicationContext;
     }
 
     public static Object getBean(String name) {

@@ -3,4 +3,4 @@ com.open.mall.common.base.config.RedisTemplateConfiguration
 com.open.mall.common.base.config.RestTemplateConfiguration
 com.open.mall.common.base.config.TaskExecutorConfiguration
 com.open.mall.common.base.config.WebMvcConfiguration
-com.open.mall.common.base.utils.SpringContextUtil
+com.open.mall.common.base.utils.SpringContextHolder

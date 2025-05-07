@@ -1,10 +1,8 @@
 package com.open.mall.common.cache.utils;
 
-import com.open.mall.common.base.utils.SpringContextUtil;
+import com.open.mall.common.base.utils.SpringContextHolder;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -21,7 +19,7 @@ public class RedisUtil {
     }
 
     private static <T> RedisTemplate<String, T> getRedisTemplate() {
-        return SpringContextUtil.getBean("redisTemplate", RedisTemplate.class);
+        return SpringContextHolder.getBean("redisTemplate", RedisTemplate.class);
     }
     public static <T> T get(String key) {
         RedisTemplate<String, T> redisTemplate = getRedisTemplate();

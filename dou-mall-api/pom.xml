@@ -14,6 +14,7 @@
     <modules>
         <module>dou-mall-api-auth</module>
         <module>dou-mall-api-user</module>
+        <module>dou-mall-api-leaf</module>
     </modules>
 
 </project>
