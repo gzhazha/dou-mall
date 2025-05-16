@@ -20,6 +20,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.open.mall</groupId>
+            <artifactId>dou-mall-common-base</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
 </project>

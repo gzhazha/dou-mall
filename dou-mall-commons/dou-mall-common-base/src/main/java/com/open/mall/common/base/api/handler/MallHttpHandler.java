@@ -16,10 +16,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @Slf4j
-@Component
 public class MallHttpHandler {
 
-	public <T> void printServerResponseToWeb(BaseResult<T> baseResult) {
+	public static  <T> void printServerResponseToWeb(BaseResult<T> baseResult) {
 		if (baseResult == null) {
 			log.info("print obj is null");
 			return;

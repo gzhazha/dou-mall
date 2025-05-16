@@ -4,6 +4,8 @@ server:
     context-path: /auth
 
 spring:
+  profiles:
+    include: swagger
   datasource:
     druid:
       username: root

@@ -32,13 +32,13 @@ public class TokenController {
 
     @Operation(summary = "获取token接口", method = "POST")
     @PostMapping("/login/captcha")
-    public BaseResult<TokenInfoVo> loginByCaptcha(@RequestBody CaptchaLoginDto captchaLoginDto) {
+    public BaseResult<TokenInfoVo> getOrCreateTokenByCaptcha(@RequestBody CaptchaLoginDto captchaLoginDto) {
         return BaseResult.success(tokenService.buildTokenInfo(captchaLoginDto));
     }
 
     @Operation(summary = "获取token接口", method = "POST")
     @PostMapping("/login/password")
-    public BaseResult<TokenInfoVo> loginByCaptcha(@RequestBody PasswordLoginDto passwordLoginDto) {
+    public BaseResult<TokenInfoVo> getOrCreateTokenByPassword(@RequestBody PasswordLoginDto passwordLoginDto) {
         return BaseResult.success(tokenService.buildTokenInfo(passwordLoginDto));
     }
 

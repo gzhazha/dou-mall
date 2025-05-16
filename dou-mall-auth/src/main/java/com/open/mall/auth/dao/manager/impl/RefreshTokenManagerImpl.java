@@ -1,7 +1,7 @@
-package com.open.mall.auth.dao.manager;
+package com.open.mall.auth.dao.manager.impl;
 
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.crypto.SecureUtil;
+import com.open.mall.auth.dao.manager.RefreshTokenManager;
 import com.open.mall.auth.dao.mapper.RefreshTokenMapper;
 import com.open.mall.auth.domain.po.RefreshToken;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class RefreshTokenManager {
+public class RefreshTokenManagerImpl implements RefreshTokenManager {
     private final RefreshTokenMapper refreshTokenMapper;
 
     public void storeRefreshToken(String token, Long userId, String ipAddress, long expireTime) {

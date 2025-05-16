@@ -6,6 +6,7 @@ import com.open.mall.common.base.api.handler.MallHttpHandler;
 import com.open.mall.common.base.domain.vo.BaseResult;
 import com.open.mall.common.base.enums.AuthError;
 import com.open.mall.common.base.enums.SystemError;
+import com.open.mall.common.feign.constants.FeignConstant;
 import com.open.mall.common.security.AuthUserContext;
 import com.open.mall.common.security.adapter.AuthPathAdapter;
 import jakarta.servlet.*;
@@ -28,18 +29,16 @@ import java.util.regex.Pattern;
  * @date 2025/4/29 16:38
  */
 
-@Component
 @AllArgsConstructor
 @Slf4j
 public class AuthFilter implements Filter {
-    private static final Pattern AUTHORIZATION_PATTERN = Pattern.compile("^Bearer (?<token>[a-zA-Z0-9-:._~+/]+=*)$",
-            Pattern.CASE_INSENSITIVE);
+    private static final Pattern AUTHORIZATION_PATTERN =
+            Pattern.compile("^Bearer (?<token>[a-zA-Z0-9-:._~+/]+=*)$", Pattern.CASE_INSENSITIVE);
     private static final String BEARER_TOKEN_HEADER_NAME = HttpHeaders.AUTHORIZATION;
 
 
     private final AuthPathAdapter authPathAdapter;
     private final TokenFeignClient tokenFeignClient;
-    private final MallHttpHandler mallHttpHandler;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -50,10 +49,15 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
-
+        
         String reqUrl = req.getRequestURI();
 
-        // todo 校验feign
+        // feign
+        if(checkFeign(req)){
+            filterChain.doFilter(req, resp);
+            return;
+        }
+
         // 校验路径白名单
         if (authPathAdapter.mathExcludePath(reqUrl)) {
             filterChain.doFilter(req, resp);
@@ -62,13 +66,13 @@ public class AuthFilter implements Filter {
 
         String token = getAuthorization(req);
         if(StringUtils.isBlank(token)) {
-            mallHttpHandler.printServerResponseToWeb(BaseResult.failure(AuthError.ACCESS_CODE_LOGIN_ERROR));
+            MallHttpHandler.printServerResponseToWeb(BaseResult.failure(AuthError.ACCESS_CODE_LOGIN_ERROR));
             return;
         }
         // 校验token
         BaseResult<UserInfoInTokenBo> tokenCheckBoBaseResult = tokenFeignClient.checkToken(token);
         if(tokenCheckBoBaseResult == null || !tokenCheckBoBaseResult.getSuccess()){
-            mallHttpHandler.printServerResponseToWeb(BaseResult.failure(SystemError.SYSTEM_INTERNAL_ERROR));
+            MallHttpHandler.printServerResponseToWeb(BaseResult.failure(SystemError.SYSTEM_INTERNAL_ERROR));
             return;
         }
         UserInfoInTokenBo userInfoInTokenBo = tokenCheckBoBaseResult.getData();
@@ -78,6 +82,14 @@ public class AuthFilter implements Filter {
         } finally {
             AuthUserContext.clean();
         }
+    }
+
+    private boolean checkFeign(HttpServletRequest req) {
+        if (req == null){
+            return false;
+        }
+        String header = req.getHeader(FeignConstant.FEIGN_FROM);
+        return FeignConstant.FEIGN_IN.equals(header);
     }
 
     private String getAuthorization(HttpServletRequest request) {

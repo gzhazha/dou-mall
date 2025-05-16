@@ -2,7 +2,9 @@ package com.open.mall.api.auth.feign;
 
 import com.open.mall.api.auth.domain.bo.UserInfoInTokenBo;
 import com.open.mall.api.auth.domain.dto.CaptchaLoginDto;
+import com.open.mall.api.auth.domain.dto.PasswordLoginDto;
 import com.open.mall.api.auth.domain.vo.TokenInfoVo;
+import com.open.mall.common.base.constants.UrlWhiteList;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +20,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "dou-mall-auth", contextId = "tokenFeignClient")
 public interface TokenFeignClient {
 
-    @PostMapping("/auth/token/login/captcha")
-    BaseResult<TokenInfoVo> getOrCreateToken(@RequestBody CaptchaLoginDto captchaLoginDto);
+    @PostMapping(UrlWhiteList.LOGIN_CAPTCHA)
+    BaseResult<TokenInfoVo> getOrCreateTokenByCaptcha(@RequestBody CaptchaLoginDto captchaLoginDto);
 
-    @GetMapping("/auth/token/check")
+    @PostMapping(UrlWhiteList.LOGIN_PASSWORD)
+    BaseResult<TokenInfoVo> getOrCreateTokenByPassword(@RequestBody PasswordLoginDto passwordLoginDto);
+
+    @GetMapping(UrlWhiteList.CHECK_TOKEN)
     BaseResult<UserInfoInTokenBo> checkToken(String token);
 
 }

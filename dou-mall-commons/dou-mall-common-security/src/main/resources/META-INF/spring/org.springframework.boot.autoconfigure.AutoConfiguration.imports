@@ -1,1 +1,2 @@
 com.open.mall.common.security.config.PasswordConfig
+com.open.mall.common.security.config.AuthConfig
