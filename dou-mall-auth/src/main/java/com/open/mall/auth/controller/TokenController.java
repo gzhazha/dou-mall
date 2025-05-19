@@ -1,13 +1,11 @@
 package com.open.mall.auth.controller;
 
-import com.open.mall.api.auth.domain.bo.UserInfoInTokenBo;
 import com.open.mall.api.auth.domain.dto.CaptchaLoginDto;
 import com.open.mall.api.auth.domain.dto.PasswordLoginDto;
 import com.open.mall.api.auth.domain.vo.TokenInfoVo;
 import com.open.mall.auth.service.TokenService;
 import com.open.mall.common.base.domain.vo.BaseResult;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
@@ -40,12 +38,6 @@ public class TokenController {
     @PostMapping("/login/password")
     public BaseResult<TokenInfoVo> getOrCreateTokenByPassword(@RequestBody PasswordLoginDto passwordLoginDto) {
         return BaseResult.success(tokenService.buildTokenInfo(passwordLoginDto));
-    }
-
-    @Operation(summary = "校验token接口", method = "GET")
-    @GetMapping("/check")
-    public BaseResult<UserInfoInTokenBo> checkToken(@Parameter(name = "token") String token) {
-        return BaseResult.success(tokenService.checkToken(token));
     }
 
 }

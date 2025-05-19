@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author zhoug
  * @date 2025/4/16 17:13
  */
-@FeignClient(name = "dou-mall-user", contextId = "userInfoFeignClient")
-public interface UserInfoFeignClient {
+@FeignClient(name = "dou-mall-user", contextId = "userFeignClient")
+public interface UserFeignClient {
 
     @GetMapping("/user/info/mobile/{mobile}")
     BaseResult<UserInfoBo> getUserInfoByMobile(@PathVariable("mobile") String mobile);

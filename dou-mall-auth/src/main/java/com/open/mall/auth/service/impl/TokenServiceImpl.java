@@ -7,7 +7,7 @@ import com.open.mall.api.auth.enums.CaptchaChannel;
 import com.open.mall.api.auth.domain.vo.TokenInfoVo;
 import com.open.mall.api.user.domain.bo.UserInfoBo;
 import com.open.mall.api.user.enums.UserStatus;
-import com.open.mall.api.user.feign.UserInfoFeignClient;
+import com.open.mall.api.user.feign.UserFeignClient;
 import com.open.mall.auth.dao.manager.AuthUserManager;
 import com.open.mall.auth.dao.manager.CredentialsPasswordManager;
 import com.open.mall.auth.enums.LoginType;
@@ -40,7 +40,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class TokenServiceImpl implements TokenService {
 
-    private final UserInfoFeignClient userInfoFeignClient;
+    private final UserFeignClient userFeignClient;
     private final AuthUserManager authUserManager;
     private final CredentialsPasswordManager credentialsPasswordManager;
     private final PasswordEncoder passwordEncoder;
@@ -106,11 +106,11 @@ public class TokenServiceImpl implements TokenService {
     private UserInfoBo getUserInfoBo(LoginType loginType, String identifier) {
         BaseResult<UserInfoBo> boBaseResult = null;
         if (Objects.equals(LoginType.EMAIL, loginType)) {
-            boBaseResult = userInfoFeignClient.getUserInfoByEmail(identifier);
+            boBaseResult = userFeignClient.getUserInfoByEmail(identifier);
         } else if (Objects.equals(LoginType.MOBILE, loginType)) {
-            boBaseResult = userInfoFeignClient.getUserInfoByMobile(identifier);
+            boBaseResult = userFeignClient.getUserInfoByMobile(identifier);
         } else if (Objects.equals(LoginType.USERNAME, loginType)) {
-            boBaseResult = userInfoFeignClient.getUserInfoByUsername(identifier);
+            boBaseResult = userFeignClient.getUserInfoByUsername(identifier);
         } else {
             log.warn("不支持的登录类型，loginType:{},identifier:{}", loginType, identifier);
         }
