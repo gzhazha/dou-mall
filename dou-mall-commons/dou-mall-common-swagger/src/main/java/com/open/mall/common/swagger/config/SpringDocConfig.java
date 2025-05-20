@@ -3,9 +3,8 @@ package com.open.mall.common.swagger.config;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
-import org.springdoc.core.GroupedOpenApi;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Collections;
@@ -16,10 +15,10 @@ import java.util.Collections;
  * @author zhoug
  */
 @AutoConfiguration
-@ConditionalOnProperty(name = "swagger.enable", havingValue = "true", matchIfMissing = true)
 public class SpringDocConfig {
 
     @Bean
+    @ConditionalOnMissingBean
     public OpenAPI customOpenAPI() {
         Contact contact = new Contact()
                 .name("dou")                             // 作者名称
@@ -30,18 +29,10 @@ public class SpringDocConfig {
         Info info = new Info()
                 .title("接口文档")                               // Api接口文档标题（必填）
                 .description("接口文档")                         // Api接口文档描述
-                .version("1.0.0")                               // Api接口版本
+                .version("1.0.0")
                 .contact(contact);                              // 设置联系人信息
         return new OpenAPI()
-                .openapi("3.0.1")                               // Open API 3.0.1(默认)
                 .info(info);                                    // 配置Swagger3.0描述信息
     }
-    
-    @Bean
-    public GroupedOpenApi publicApi() {
-        return GroupedOpenApi.builder()
-                .group("public-api")
-                .pathsToMatch("/**")
-                .build();
-    }
+
 }

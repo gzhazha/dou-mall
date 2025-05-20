@@ -14,3 +14,11 @@ spring:
           uri: lb://dou-mall-user
           predicates:
             - Path=/user/**
+
+knife4j:
+  gateway:
+    enabled: true
+    strategy: discover
+    discover:
+      version: openapi3
+      enabled: true

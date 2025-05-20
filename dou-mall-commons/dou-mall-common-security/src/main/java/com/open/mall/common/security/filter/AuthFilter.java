@@ -1,5 +1,6 @@
 package com.open.mall.common.security.filter;
 
+import cn.hutool.core.collection.CollUtil;
 import com.open.mall.api.auth.domain.bo.UserInfoInTokenBo;
 import com.open.mall.api.auth.feign.TokenFeignClient;
 import com.open.mall.common.base.api.handler.MallHttpHandler;
@@ -16,9 +17,11 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.util.PathMatcher;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +42,7 @@ public class AuthFilter implements Filter {
 
     private final AuthPathAdapter authPathAdapter;
     private final TokenFeignClient tokenFeignClient;
+    private final PathMatcher pathMatcher = new AntPathMatcher();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -59,9 +63,14 @@ public class AuthFilter implements Filter {
         }
 
         // 校验路径白名单
-        if (authPathAdapter.mathExcludePath(reqUrl)) {
-            filterChain.doFilter(req, resp);
-            return;
+        List<String> noAuthorizationPaths = authPathAdapter.getNoAuthorizationPaths();
+        if (CollUtil.isNotEmpty(noAuthorizationPaths)) {
+            for (String noAuthorizationPath : noAuthorizationPaths) {
+                if (pathMatcher.match(noAuthorizationPath, reqUrl)) {
+                    filterChain.doFilter(req, resp);
+                    return;
+                }
+            }
         }
 
         String token = getAuthorization(req);

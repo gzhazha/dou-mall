@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.open.mall</groupId>
         <artifactId>dou-mall-api</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>dou-mall-api-leaf</artifactId>

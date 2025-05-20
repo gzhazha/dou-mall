@@ -42,7 +42,7 @@ public class AuthConfig {
 		// 添加过滤器
 		registration.setFilter(authFilter);
 		// 设置过滤路径，/*所有路径
-		registration.addUrlPatterns(ArrayUtil.toArray(authConfigAdapter.requiresAuthorizationPaths(), String.class));
+		registration.addUrlPatterns(ArrayUtil.toArray(authConfigAdapter.getRequiresAuthorizationPaths(), String.class));
 		registration.setName("authFilter");
 		// 设置优先级
 		registration.setOrder(0);
