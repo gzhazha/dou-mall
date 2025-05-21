@@ -3,6 +3,7 @@ package com.open.mall.api.leaf.feign;
 import com.open.mall.common.base.domain.vo.BaseResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * A
@@ -14,5 +15,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 @FeignClient(name = "dou-mall-leaf", contextId = "segmentFeignClient")
 public interface SegmentFeignClient {
     @GetMapping("/leaf/id/next")
-    BaseResult<Long> getSegmentId(String key);
+    BaseResult<Long> getSegmentId(@RequestParam("key") String key);
 }

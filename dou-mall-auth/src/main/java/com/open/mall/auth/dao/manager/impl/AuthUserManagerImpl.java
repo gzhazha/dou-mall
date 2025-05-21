@@ -4,10 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.open.mall.auth.dao.manager.AuthUserManager;
 import com.open.mall.auth.dao.mapper.AuthUserMapper;
+import com.open.mall.auth.dao.mapper.CredentialsPasswordMapper;
 import com.open.mall.auth.domain.po.AuthUser;
+import com.open.mall.auth.domain.po.CredentialsPassword;
 import com.open.mall.common.base.utils.WebUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -21,6 +25,8 @@ import java.util.Date;
 @Component
 public class AuthUserManagerImpl implements AuthUserManager {
     private final AuthUserMapper authUserMapper;
+    private final CredentialsPasswordMapper credentialsPasswordMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public AuthUser getOrCreateAuthUser(Long userId) {
         if (userId == null) {
@@ -62,5 +68,18 @@ public class AuthUserManagerImpl implements AuthUserManager {
         }else {
             authUserMapper.addOneFailure(userId);
         }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void register(Long userId, String password) {
+        AuthUser authUser = new AuthUser();
+        authUser.setUserId(userId);
+        authUserMapper.insert(authUser);
+
+        CredentialsPassword credentialsPassword = new CredentialsPassword();
+        credentialsPassword.setUserId(userId);
+        credentialsPassword.setPasswordHash(passwordEncoder.encode(password));
+        credentialsPasswordMapper.insert(credentialsPassword);
     }
 }

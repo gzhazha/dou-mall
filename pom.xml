@@ -29,6 +29,7 @@
         <spring-cloud-dependencies.version>2023.0.2</spring-cloud-dependencies.version>
         <spring-cloud-gateway-dependencies.version>4.1.4</spring-cloud-gateway-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2023.0.1.0</spring-cloud-alibaba-dependencies.version>
+        <micrometer-tracing.version>1.15.0</micrometer-tracing.version>
 
         <mybatis-plus-spring-boot3.version>3.5.11</mybatis-plus-spring-boot3.version>
         <druid-spring-boot-3-starter.version>1.2.23</druid-spring-boot-3-starter.version>
@@ -71,6 +72,13 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring-cloud-alibaba-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-bom</artifactId>
+                <version>${micrometer-tracing.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

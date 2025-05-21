@@ -21,4 +21,6 @@ public interface AuthUserManager {
      * @param isSuccessful 是否登录成功
      */
     void loginRecord(Long userId, boolean isSuccessful);
+
+    void register(Long userId, String password);
 }

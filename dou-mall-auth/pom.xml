@@ -41,11 +41,6 @@
         </dependency>
         <dependency>
             <groupId>com.open.mall</groupId>
-            <artifactId>dou-mall-common-trace</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.open.mall</groupId>
             <artifactId>dou-mall-common-db</artifactId>
             <version>${revision}</version>
         </dependency>
@@ -56,7 +51,7 @@
         </dependency>
         <dependency>
             <groupId>com.open.mall</groupId>
-            <artifactId>dou-mall-common-feign</artifactId>
+            <artifactId>dou-mall-api-leaf</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>

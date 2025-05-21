@@ -3,6 +3,7 @@ package com.open.mall.common.base.domain.vo;
 import com.open.mall.common.base.enums.ErrorCode;
 import com.open.mall.common.base.enums.SystemError;
 import com.open.mall.common.base.enums.ResultCode;
+import com.open.mall.common.trace.TraceUtil;
 import io.micrometer.common.util.StringUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,7 +34,7 @@ public class BaseResult<T> {
     /**
      * 链路追踪
      */
-    private String traceId;
+    private String traceId = TraceUtil.getTraceId();
 
     /**
      * 数据

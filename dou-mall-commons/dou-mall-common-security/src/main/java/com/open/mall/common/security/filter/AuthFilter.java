@@ -2,7 +2,7 @@ package com.open.mall.common.security.filter;
 
 import cn.hutool.core.collection.CollUtil;
 import com.open.mall.api.auth.domain.bo.UserInfoInTokenBo;
-import com.open.mall.api.auth.feign.TokenFeignClient;
+import com.open.mall.api.auth.feign.AuthFeignClient;
 import com.open.mall.common.base.api.handler.MallHttpHandler;
 import com.open.mall.common.base.domain.vo.BaseResult;
 import com.open.mall.common.base.enums.AuthError;
@@ -41,7 +41,7 @@ public class AuthFilter implements Filter {
 
 
     private final AuthPathAdapter authPathAdapter;
-    private final TokenFeignClient tokenFeignClient;
+    private final AuthFeignClient authFeignClient;
     private final PathMatcher pathMatcher = new AntPathMatcher();
 
     @Override
@@ -79,7 +79,7 @@ public class AuthFilter implements Filter {
             return;
         }
         // 校验token
-        BaseResult<UserInfoInTokenBo> tokenCheckBoBaseResult = tokenFeignClient.checkToken(token);
+        BaseResult<UserInfoInTokenBo> tokenCheckBoBaseResult = authFeignClient.checkToken(token);
         if(tokenCheckBoBaseResult == null || !tokenCheckBoBaseResult.getSuccess()){
             MallHttpHandler.printServerResponseToWeb(BaseResult.failure(SystemError.SYSTEM_INTERNAL_ERROR));
             return;

@@ -1,8 +1,11 @@
 package com.open.mall.user.converter;
 
+import com.open.mall.api.auth.domain.bo.AuthRegisterBo;
 import com.open.mall.api.user.domain.bo.UserInfoBo;
+import com.open.mall.user.domain.dto.ClientRegisterDto;
 import com.open.mall.user.domain.po.UserInfo;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 /**
@@ -17,5 +20,17 @@ import org.mapstruct.MappingConstants;
 public interface UserBeanConverter {
 
     UserInfoBo toUserInfoBo(UserInfo userInfo);
-    
+
+    @Mapping(target = "userId",source = "id")
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "registrationIp", ignore = true)
+    @Mapping(target = "phoneVerified", ignore = true)
+    @Mapping(target = "nickname", ignore = true)
+    @Mapping(target = "emailVerified", ignore = true)
+    @Mapping(target = "deletedAt", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    UserInfo toUserInfo(Long id ,ClientRegisterDto clientRegisterDto);
+
+    AuthRegisterBo toAuthRegisterBo(Long userId,ClientRegisterDto clientRegisterDto);
 }

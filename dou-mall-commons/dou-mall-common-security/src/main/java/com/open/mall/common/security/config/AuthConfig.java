@@ -1,7 +1,7 @@
 package com.open.mall.common.security.config;
 
 import cn.hutool.core.util.ArrayUtil;
-import com.open.mall.api.auth.feign.TokenFeignClient;
+import com.open.mall.api.auth.feign.AuthFeignClient;
 import com.open.mall.common.feign.config.FeignAutoConfiguration;
 import com.open.mall.common.security.adapter.AuthPathAdapter;
 import com.open.mall.common.security.adapter.DefaultAuthPathAdapter;
@@ -31,8 +31,8 @@ public class AuthConfig {
 	}
 
     @Bean
-    public AuthFilter authFilter(AuthPathAdapter authPathAdapter, TokenFeignClient tokenFeignClient) {
-        return new AuthFilter(authPathAdapter, tokenFeignClient);
+    public AuthFilter authFilter(AuthPathAdapter authPathAdapter, AuthFeignClient authFeignClient) {
+        return new AuthFilter(authPathAdapter, authFeignClient);
     }
 
 	@Bean

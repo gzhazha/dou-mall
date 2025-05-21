@@ -8,13 +8,11 @@ import com.open.mall.leaf.exception.LeafServerException;
 import com.open.mall.leaf.exception.NoKeyException;
 import com.open.mall.leaf.service.SegmentService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
 
 
-@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class SegmentFeignController implements SegmentFeignClient {

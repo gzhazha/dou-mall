@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>com.open.mall</groupId>
-            <artifactId>dou-mall-common-feign</artifactId>
+            <artifactId>dou-mall-common-cache</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
