@@ -39,7 +39,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         registration.addUrlPatterns("/*");
         registration.setName("logFilter");
         // 设置优先级
-        registration.setOrder(0);
+        registration.setOrder(Integer.MIN_VALUE);
         registration.setDispatcherTypes(DispatcherType.REQUEST);
         return registration;
     }
