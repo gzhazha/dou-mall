@@ -10,7 +10,6 @@ import com.open.mall.common.base.enums.SystemError;
 import com.open.mall.common.base.enums.UserError;
 import com.open.mall.common.base.exception.MallBaseException;
 import com.open.mall.common.base.utils.MallAssert;
-import com.open.mall.common.trace.TraceUtil;
 import com.open.mall.user.converter.UserBeanConverter;
 import com.open.mall.user.dao.mapper.UserInfoMapper;
 import com.open.mall.user.domain.dto.ClientRegisterDto;
@@ -44,7 +43,6 @@ public class RegisterServiceImpl implements RegisterService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long registerClient(ClientRegisterDto clientRegisterDto) {
-        String traceId = TraceUtil.getTraceId();
         checkClientRegisterDto(clientRegisterDto);
         BaseResult<Long> segmentId = segmentFeignClient.getSegmentId(LeafConstant.AUTH);
         Long id = Optional.ofNullable(segmentId)

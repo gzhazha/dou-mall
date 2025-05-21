@@ -1,9 +1,7 @@
 package com.open.mall.common.feign.config;
 
-import com.open.mall.common.base.CommonBaseAutoConfiguration;
 import com.open.mall.common.feign.core.FeignAuthInterceptor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
@@ -16,7 +14,6 @@ import org.springframework.context.annotation.Bean;
 
 @EnableFeignClients(basePackages = {"com.open.mall.**.feign"})
 @AutoConfiguration
-@AutoConfigureAfter({CommonBaseAutoConfiguration.class})
 public class FeignAutoConfiguration {
 
     @Bean

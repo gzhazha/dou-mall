@@ -37,7 +37,7 @@ public class AuthConfig {
 
 	@Bean
 	@Lazy
-	public FilterRegistrationBean<AuthFilter> filterRegistration(AuthPathAdapter authConfigAdapter, AuthFilter authFilter) {
+	public FilterRegistrationBean<AuthFilter> authFilterFilterRegistrationBean(AuthPathAdapter authConfigAdapter, AuthFilter authFilter) {
 		FilterRegistrationBean<AuthFilter> registration = new FilterRegistrationBean<>();
 		// 添加过滤器
 		registration.setFilter(authFilter);

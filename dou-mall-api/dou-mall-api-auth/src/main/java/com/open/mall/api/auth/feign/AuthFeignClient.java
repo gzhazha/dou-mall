@@ -3,9 +3,10 @@ package com.open.mall.api.auth.feign;
 import com.open.mall.api.auth.domain.bo.AuthRegisterBo;
 import com.open.mall.api.auth.domain.bo.UserInfoInTokenBo;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.open.mall.common.base.domain.vo.BaseResult;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -20,6 +21,6 @@ public interface AuthFeignClient {
     @GetMapping("/auth/token/check")
     BaseResult<UserInfoInTokenBo> checkToken(@RequestParam String token);
 
-    @GetMapping("/auth/register")
-    BaseResult<Void> register(@SpringQueryMap AuthRegisterBo authRegisterBo);
+    @PostMapping("/auth/register")
+    BaseResult<Void> register(@RequestBody AuthRegisterBo authRegisterBo);
 }
