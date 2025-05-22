@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author zhoug
  * @date 2025/4/16 17:13
  */
-@FeignClient(name = "dou-mall-user", contextId = "userFeignClient")
+@FeignClient(name = "dou-mall-user", contextId = "userFeignClient",fallback = UserFeignClientFallback.class)
 public interface UserFeignClient {
 
     @GetMapping("/user/info/mobile/{mobile}")

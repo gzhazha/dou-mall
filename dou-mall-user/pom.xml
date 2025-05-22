@@ -47,11 +47,6 @@
             <artifactId>dou-mall-common-cache</artifactId>
             <version>${revision}</version>
         </dependency>
-        <dependency>
-            <groupId>com.open.mall</groupId>
-            <artifactId>dou-mall-api-leaf</artifactId>
-            <version>${revision}</version>
-        </dependency>
 
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

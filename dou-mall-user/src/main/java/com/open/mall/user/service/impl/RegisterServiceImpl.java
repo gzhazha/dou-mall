@@ -3,12 +3,8 @@ package com.open.mall.user.service.impl;
 import cn.hutool.core.lang.Validator;
 import com.open.mall.api.auth.domain.bo.AuthRegisterBo;
 import com.open.mall.api.auth.feign.AuthFeignClient;
-import com.open.mall.api.leaf.constants.LeafConstant;
-import com.open.mall.api.leaf.feign.SegmentFeignClient;
 import com.open.mall.common.base.domain.vo.BaseResult;
-import com.open.mall.common.base.enums.SystemError;
 import com.open.mall.common.base.enums.UserError;
-import com.open.mall.common.base.exception.MallBaseException;
 import com.open.mall.common.base.utils.MallAssert;
 import com.open.mall.user.converter.UserBeanConverter;
 import com.open.mall.user.dao.mapper.UserInfoMapper;
@@ -21,7 +17,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 /**
  * RegisterServiceImpl
@@ -36,23 +31,21 @@ import java.util.Optional;
 public class RegisterServiceImpl implements RegisterService {
 
     private final UserInfoMapper userInfoMapper;
+    @SuppressWarnings("all")
     private final AuthFeignClient authFeignClient;
-    private final SegmentFeignClient segmentFeignClient;
     private final UserBeanConverter userBeanConverter;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long registerClient(ClientRegisterDto clientRegisterDto) {
         checkClientRegisterDto(clientRegisterDto);
-        BaseResult<Long> segmentId = segmentFeignClient.getSegmentId(LeafConstant.AUTH);
-        Long id = Optional.ofNullable(segmentId)
-                .map(BaseResult::getData)
-                .orElseThrow(() -> new MallBaseException(SystemError.SYSTEM_INTERNAL_ERROR1.format("生成id失败")));
-        UserInfo userInfo = userBeanConverter.toUserInfo(id, clientRegisterDto);
-        MallAssert.isTrue(userInfoMapper.insert(userInfo)>0, UserError.REGISTER_ERROR);
-        AuthRegisterBo authRegisterBo = userBeanConverter.toAuthRegisterBo(id,clientRegisterDto);
-        BaseResult<Void> result =  authFeignClient.register(authRegisterBo);
-        MallAssert.isTrue(result!=null&&result.getSuccess(),UserError.REGISTER_ERROR);
+        UserInfo userInfo = userBeanConverter.toUserInfo(clientRegisterDto);
+        boolean expression = userInfoMapper.insert(userInfo) > 0;
+        MallAssert.isTrue(expression, UserError.REGISTER_ERROR);
+        Long id = userInfo.getUserId();
+        AuthRegisterBo authRegisterBo = userBeanConverter.toAuthRegisterBo(id, clientRegisterDto);
+        BaseResult<Void> result = authFeignClient.register(authRegisterBo);
+        MallAssert.isTrue(result != null && result.getSuccess(), UserError.REGISTER_ERROR);
         return id;
     }
 

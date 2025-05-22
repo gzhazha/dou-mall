@@ -21,7 +21,7 @@ public interface UserBeanConverter {
 
     UserInfoBo toUserInfoBo(UserInfo userInfo);
 
-    @Mapping(target = "userId",source = "id")
+    @Mapping(target = "userId",ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "registrationIp", ignore = true)
@@ -30,7 +30,7 @@ public interface UserBeanConverter {
     @Mapping(target = "emailVerified", ignore = true)
     @Mapping(target = "deletedAt", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
-    UserInfo toUserInfo(Long id ,ClientRegisterDto clientRegisterDto);
+    UserInfo toUserInfo(ClientRegisterDto clientRegisterDto);
 
     AuthRegisterBo toAuthRegisterBo(Long userId,ClientRegisterDto clientRegisterDto);
 }

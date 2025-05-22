@@ -51,11 +51,6 @@
         </dependency>
         <dependency>
             <groupId>com.open.mall</groupId>
-            <artifactId>dou-mall-api-leaf</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.open.mall</groupId>
             <artifactId>dou-mall-common-security</artifactId>
             <version>${revision}</version>
         </dependency>
