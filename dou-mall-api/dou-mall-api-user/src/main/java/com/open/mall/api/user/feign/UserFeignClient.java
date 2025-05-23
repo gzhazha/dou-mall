@@ -12,16 +12,19 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author zhoug
  * @date 2025/4/16 17:13
  */
-@FeignClient(name = "dou-mall-user", contextId = "userFeignClient",fallback = UserFeignClientFallback.class)
+@FeignClient(name = "dou-mall-user",
+        contextId = "userFeignClient",
+        path = "/user/info",
+        fallback = UserFeignClientFallback.class)
 public interface UserFeignClient {
 
-    @GetMapping("/user/info/mobile/{mobile}")
+    @GetMapping("/mobile/{mobile}")
     BaseResult<UserInfoBo> getUserInfoByMobile(@PathVariable("mobile") String mobile);
 
-    @GetMapping("/user/info/email/{email}")
+    @GetMapping("/email/{email}")
     BaseResult<UserInfoBo> getUserInfoByEmail(@PathVariable("email") String email);
 
-    @GetMapping("/user/info/username/{username}")
+    @GetMapping("/username/{username}")
     BaseResult<UserInfoBo> getUserInfoByUsername(@PathVariable("username") String username);
 
 }

@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Bean;
  * @author zhoug
  * @date 2025/4/30 09:44
  */
-
-@EnableFeignClients(basePackages = {"com.open.mall.**.feign"})
+@SuppressWarnings("all")
+@EnableFeignClients(basePackages = {"com.open.mall.api.**.feign"})
 @AutoConfiguration
 public class FeignAutoConfiguration {
 

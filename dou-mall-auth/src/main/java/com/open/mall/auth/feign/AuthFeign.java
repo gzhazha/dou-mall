@@ -1,7 +1,8 @@
-package com.open.mall.auth.remote;
+package com.open.mall.auth.feign;
 
 import com.open.mall.api.auth.domain.bo.AuthRegisterBo;
 import com.open.mall.api.auth.domain.bo.UserInfoInTokenBo;
+import com.open.mall.api.auth.feign.AuthFeignClient;
 import com.open.mall.auth.service.RegisterService;
 import com.open.mall.auth.service.TokenService;
 import com.open.mall.common.base.domain.vo.BaseResult;
@@ -23,19 +24,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Validated
 @RequiredArgsConstructor
-public class AuthRemoteClient {
+public class AuthFeign implements AuthFeignClient {
 
     private final TokenService tokenService;
     private final RegisterService registerService;
 
     @Operation(summary = "校验token接口", method = "GET")
-    @GetMapping("/token/check")
+    @Override
     public BaseResult<UserInfoInTokenBo> checkToken(@Parameter(name = "token") String token) {
         return BaseResult.success(tokenService.checkToken(token));
     }
 
     @Operation(summary = "注册auth", method = "GET")
-    @PostMapping("/register")
+    @Override
     public BaseResult<Void> register(@RequestBody AuthRegisterBo authRegisterBo) {
         registerService.register(authRegisterBo);
         return BaseResult.success();

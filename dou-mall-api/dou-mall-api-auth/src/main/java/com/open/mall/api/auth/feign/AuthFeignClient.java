@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author zhoug
  * @date 2025/4/16 17:13
  */
-@FeignClient(name = "dou-mall-auth", contextId = "authFeignClient")
+@FeignClient(name = "dou-mall-auth", contextId = "authFeignClient",path = "auth")
 public interface AuthFeignClient {
 
-    @GetMapping("/auth/token/check")
+    @GetMapping("/token/check")
     BaseResult<UserInfoInTokenBo> checkToken(@RequestParam String token);
 
-    @PostMapping("/auth/register")
+    @PostMapping("/register")
     BaseResult<Void> register(@RequestBody AuthRegisterBo authRegisterBo);
 }
