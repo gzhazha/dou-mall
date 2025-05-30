@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Data;
 
@@ -79,19 +80,19 @@ public class UserInfo implements Serializable {
      * 记录创建时间
      */
     @TableField(value = "created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     /**
      * 记录最后更新时间
      */
     @TableField(value = "updated_at")
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     /**
      * 软删除标记的时间戳 (NULL表示未删除)
      */
     @TableField(value = "deleted_at")
-    private Date deletedAt;
+    private LocalDateTime deletedAt;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

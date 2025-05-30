@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Data;
 
@@ -27,7 +28,7 @@ public class AuthUser implements Serializable {
      * 最近一次成功登录时间 (任意方式)
      */
     @TableField(value = "last_login_at")
-    private Date lastLoginAt;
+    private LocalDateTime lastLoginAt;
 
     /**
      * 最近一次成功登录IP地址
@@ -45,19 +46,19 @@ public class AuthUser implements Serializable {
      * 全局账户锁定截止时间
      */
     @TableField(value = "lockout_until")
-    private Date lockoutUntil;
+    private LocalDateTime lockoutUntil;
 
     /**
      * 记录在本服务创建时间
      */
     @TableField(value = "created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     /**
      * 记录最后更新时间
      */
     @TableField(value = "updated_at")
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     @Serial
     @TableField(exist = false)

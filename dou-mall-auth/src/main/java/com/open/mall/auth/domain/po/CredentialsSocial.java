@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Data;
 
@@ -61,7 +62,7 @@ public class CredentialsSocial implements Serializable {
      * 第三方访问令牌过期时间
      */
     @TableField(value = "token_expires_at")
-    private Date tokenExpiresAt;
+    private LocalDateTime tokenExpiresAt;
 
     /**
      * 用户授予的权限范围 (Scope)
@@ -73,13 +74,13 @@ public class CredentialsSocial implements Serializable {
      * 绑定时间
      */
     @TableField(value = "linked_at")
-    private Date linkedAt;
+    private LocalDateTime linkedAt;
 
     /**
      * 
      */
     @TableField(value = "updated_at")
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

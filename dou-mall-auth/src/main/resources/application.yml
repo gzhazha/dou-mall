@@ -4,8 +4,6 @@ server:
     context-path: /auth
 
 spring:
-  profiles:
-    include: swagger
   datasource:
     druid:
       username: root
@@ -18,18 +16,4 @@ spring:
       host: 127.0.0.1
       password: 123456
 
-# Token配置
-token:
-  # 访问Token过期时间（秒）
-  access:
-    expire-time: 3600
-  # 刷新Token过期时间（秒）
-  refresh:
-    expire-time: 604800
-  temporary:
-    expire-time: 300
-  # Token签名密钥（生产环境请修改为强密钥）
-  secret-key: "your-secret-key-here"
-  # 签名算法
-  algorithm: "HmacSHA256"
 

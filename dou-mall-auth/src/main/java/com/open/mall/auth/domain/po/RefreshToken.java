@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Data;
 
@@ -38,13 +39,13 @@ public class RefreshToken implements Serializable {
      * 颁发时间
      */
     @TableField(value = "issued_at")
-    private Date issuedAt;
+    private LocalDateTime issuedAt;
 
     /**
      * 令牌过期时间
      */
     @TableField(value = "expires_at")
-    private Date expiresAt;
+    private LocalDateTime expiresAt;
 
     /**
      * 是否已被吊销 (0=否, 1=是)

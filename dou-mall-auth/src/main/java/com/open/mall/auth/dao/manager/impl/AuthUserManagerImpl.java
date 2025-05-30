@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -58,7 +59,7 @@ public class AuthUserManagerImpl implements AuthUserManager {
         if (authUser == null) {
             return;
         }
-        Date lastLoginAt = new Date();
+        LocalDateTime lastLoginAt = LocalDateTime.now();
         if (isSuccessful) {
             AuthUser user = new AuthUser();
             user.setUserId(userId);

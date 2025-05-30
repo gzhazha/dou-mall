@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.Date;
 import java.util.Optional;
 
@@ -27,13 +30,13 @@ public class RefreshTokenManagerImpl implements RefreshTokenManager {
     private final RefreshTokenMapper refreshTokenMapper;
 
     public void storeRefreshToken(String token, Long userId, String ipAddress, long expireTime) {
-        Date issuedAt = new Date();
+        LocalDateTime issuedAt = LocalDateTime.now();
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setTokenHash(buildTokenHash(token));
         refreshToken.setUserId(userId);
         refreshToken.setIpAddress(ipAddress);
         refreshToken.setIssuedAt(issuedAt);
-        refreshToken.setExpiresAt(DateUtils.addMilliseconds(issuedAt, (int) expireTime));
+        refreshToken.setExpiresAt(issuedAt.plus(expireTime, ChronoUnit.MILLIS));
         refreshToken.setRevoked(0);
         refreshTokenMapper.insert(refreshToken);
     }

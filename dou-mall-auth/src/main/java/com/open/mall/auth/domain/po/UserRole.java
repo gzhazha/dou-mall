@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Data;
 
@@ -33,7 +34,7 @@ public class UserRole implements Serializable {
      * 分配时间
      */
     @TableField(value = "assigned_at")
-    private Date assignedAt;
+    private LocalDateTime assignedAt;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

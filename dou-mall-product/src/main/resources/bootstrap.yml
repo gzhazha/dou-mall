@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    active: @profiles.active@
+  application:
+    name: @project.artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: @nacos.server-addr@
+        namespace: @nacos.namespace@
+        username: @nacos.username@
+        password: @nacos.password@
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        username: ${spring.cloud.nacos.discovery.username}
+        password: ${spring.cloud.nacos.discovery.password}
+        file-extension: yaml

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Data;
 
@@ -32,13 +33,13 @@ public class CredentialsPassword implements Serializable {
      * 密码最后更新时间
      */
     @TableField(value = "password_updated_at")
-    private Date passwordUpdatedAt;
+    private LocalDateTime passwordUpdatedAt;
 
     /**
      * 记录最后更新时间
      */
     @TableField(value = "updated_at")
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     @Serial
     @TableField(exist = false)
