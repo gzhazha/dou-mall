@@ -15,6 +15,7 @@
         <module>dou-mall-user</module>
         <module>dou-mall-leaf</module>
         <module>dou-mall-product</module>
+        <module>dou-mall-cart</module>
     </modules>
 
     <properties>
