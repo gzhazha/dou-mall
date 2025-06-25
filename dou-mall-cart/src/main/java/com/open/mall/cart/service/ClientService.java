@@ -1,9 +1,8 @@
 package com.open.mall.cart.service;
 
 
-import com.open.mall.cart.domain.vo.CartListVo;
+import com.open.mall.cart.domain.vo.CartDetailsVo;
 
-import java.util.List;
 
 /**
 * @author guang
@@ -12,5 +11,5 @@ import java.util.List;
 */
 public interface ClientService {
 
-    List<CartListVo> getAll(Long userId);
+    CartDetailsVo details(Long userId);
 }

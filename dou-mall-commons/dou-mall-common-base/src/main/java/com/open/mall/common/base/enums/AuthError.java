@@ -28,6 +28,8 @@ public enum AuthError implements ErrorCode {
     ACCESS_CODE_LOGIN_ERROR(-401, "授权码错误"),
     REFRESH_CODE_LOGIN_ERROR(-402, "刷新授权码错误"),
 
+    NOT_LOGGED_IN_ERROR(-401, "需要登录"),
+
     ;
 
 

@@ -1,13 +1,13 @@
 package com.open.mall.cart.service.impl;
 
-import com.open.mall.cart.domain.vo.CartListVo;
-import com.open.mall.cart.mapper.CartItemMapper;
+import com.open.mall.cart.dao.manager.CartManager;
+import com.open.mall.cart.domain.bo.CartDetailsBo;
+import com.open.mall.cart.domain.vo.CartDetailsVo;
 import com.open.mall.cart.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 /**
  * ClientServiceImpl
@@ -20,9 +20,15 @@ import java.util.List;
 @Slf4j
 public class ClientServiceImpl implements ClientService {
 
-    private final CartItemMapper cartItemMapper;
+    private final CartManager cartManager;
+
     @Override
-    public List<CartListVo> getAll(Long userId) {
-        return cartItemMapper.selectList(null);
+    public CartDetailsVo details(Long userId) {
+        CartDetailsBo cartDetailsBo = cartManager.getCartDetailsBo(userId);
+        if (cartDetailsBo == null) {
+            return null;
+        }
+
+        return null;
     }
 }

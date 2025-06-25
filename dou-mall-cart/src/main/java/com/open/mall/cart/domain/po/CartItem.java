@@ -23,10 +23,10 @@ public class CartItem implements Serializable {
     private Long id;
 
     /**
-     * 用户 ID
+     * 购物车 ID
      */
-    @TableField(value = "user_id")
-    private Long userId;
+    @TableField(value = "cart_id")
+    private Long cartId;
 
     /**
      * 商品 SPU ID
