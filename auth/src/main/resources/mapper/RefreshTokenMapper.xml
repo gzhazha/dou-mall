@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.open.mall.auth.mapper.RefreshTokenMapper">
+
+    <resultMap id="BaseResultMap" type="com.open.mall.auth.domain.po.RefreshToken">
+            <id property="tokenId" column="token_id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="authType" column="auth_type" jdbcType="VARCHAR"/>
+            <result property="authCode" column="auth_code" jdbcType="VARCHAR"/>
+            <result property="refreshToken" column="refresh_token" jdbcType="VARCHAR"/>
+            <result property="deviceId" column="device_id" jdbcType="VARCHAR"/>
+            <result property="ipAddress" column="ip_address" jdbcType="VARCHAR"/>
+            <result property="expiredAt" column="expired_at" jdbcType="TIMESTAMP"/>
+            <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+            <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        token_id,user_id,auth_code,
+        refresh_token,device_id,ip_address,
+        expired_at,created_at,updated_at
+    </sql>
+</mapper>

@@ -8,14 +8,11 @@
     <version>${revision}</version>
     <packaging>pom</packaging>
     <modules>
-        <module>dou-mall-gateway</module>
-        <module>dou-mall-commons</module>
-        <module>dou-mall-api</module>
-        <module>dou-mall-auth</module>
-        <module>dou-mall-user</module>
-        <module>dou-mall-leaf</module>
-        <module>dou-mall-product</module>
-        <module>dou-mall-cart</module>
+        <module>gateway</module>
+        <module>auth</module>
+        <module>user</module>
+        <module>commons</module>
+        <module>api</module>
     </modules>
 
     <properties>
@@ -34,7 +31,9 @@
         <micrometer-tracing.version>1.15.0</micrometer-tracing.version>
 
         <mybatis-plus-spring-boot3.version>3.5.11</mybatis-plus-spring-boot3.version>
+        <mybatis-plus.version>3.5.12</mybatis-plus.version>
         <druid-spring-boot-3-starter.version>1.2.23</druid-spring-boot-3-starter.version>
+        <shardingsphere-jdbc-core.version>5.4.1</shardingsphere-jdbc-core.version>
 
         <micrometer-tracing-bom.version>1.4.3</micrometer-tracing-bom.version>
         <springdoc-openapi.version>2.5.0</springdoc-openapi.version>
@@ -114,6 +113,18 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-3-starter</artifactId>
                 <version>${druid-spring-boot-3-starter.version}</version>
+            </dependency>
+            <!-- sharding jdbc -->
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>shardingsphere-jdbc-core</artifactId>
+                <version>${shardingsphere-jdbc-core.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.shardingsphere</groupId>
+                        <artifactId>shardingsphere-logging-core</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>

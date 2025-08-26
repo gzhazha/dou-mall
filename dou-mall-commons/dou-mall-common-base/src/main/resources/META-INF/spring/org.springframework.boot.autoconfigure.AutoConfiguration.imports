@@ -1,5 +1,0 @@
-com.open.mall.common.base.config.JacksonConfiguration
-com.open.mall.common.base.config.RestTemplateConfiguration
-com.open.mall.common.base.config.TaskExecutorConfiguration
-com.open.mall.common.base.config.WebMvcConfiguration
-com.open.mall.common.base.utils.SpringContextHolder

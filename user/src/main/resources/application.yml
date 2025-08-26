@@ -1,0 +1,29 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: user
+  datasource:
+    druid:
+      username: root
+      password: 123456
+      url: jdbc:mysql://127.0.0.1:3306/dou_mall_user?useOldAliasMetadataBehavior=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 5
+      min-idle: 20
+      max-active: 40
+      max-wait: 10000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      timeBetweenConnectErrorMillis: 30000
+      failFast: true
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 100
+      connectProperties:
+        connectTimeout: "3000"
+        socketTimeout: "30000"
