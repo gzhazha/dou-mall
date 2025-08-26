@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: @nacos.server-addr@
+        namespace: @nacos.namespace@
+        username: @nacos.username@
+        password: @nacos.password@
+      discovery:
+        server-addr: @nacos.server-addr@
+        namespace: @nacos.namespace@
+        username: @nacos.username@
+        password: @nacos.password@

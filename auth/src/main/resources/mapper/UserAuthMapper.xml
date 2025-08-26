@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.open.mall.auth.mapper.UserAuthMapper">
+
+    <resultMap id="BaseResultMap" type="com.open.mall.auth.domain.po.UserAuth">
+            <id property="authId" column="auth_id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="authType" column="auth_type" jdbcType="VARCHAR"/>
+            <result property="identifier" column="identifier" jdbcType="VARCHAR"/>
+            <result property="credential" column="credential" jdbcType="VARCHAR"/>
+            <result property="salt" column="salt" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+            <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        auth_id,user_id,auth_type,
+        identifier,credential,salt,
+        status,created_at,updated_at
+    </sql>
+</mapper>

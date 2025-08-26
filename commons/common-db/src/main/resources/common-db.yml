@@ -1,0 +1,84 @@
+spring:
+  datasource:
+    druid:
+      filters: stat,slf4j
+      web-stat-filter: # WebStatFilter配置
+        enabled: true
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+      stat-view-servlet: # StatViewServlet配置
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username: admin123
+        login-password: ${v.druid.stat-view-servlet.login-password}
+      initial-size: 5
+      min-idle: 10
+      max-active: 50
+      max-wait: 10000
+      distribution: # 分销
+        url: ${db.ticket-distribution.url}
+        username: ${db.ticket-distribution.username3}
+        password: ${v.db.ticket-distribution.password3}
+        aes_secret_key: ${v.db.ticket-distribution.aes_secret_key}
+        initial-size: 5
+        min-idle: 20
+        max-active: 40
+        max-wait: 10000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        timeBetweenConnectErrorMillis: 30000
+        failFast: true
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 100
+        connectProperties:
+          connectTimeout: "3000"
+          socketTimeout: "30000"
+      distribution-slave: # 分销
+        url: ${db.ticket-distribution-slave.url}
+        username: ${db.ticket-distribution-slave.username3}
+        password: ${v.db.ticket-distribution-slave.password3}
+        aes_secret_key: ${v.db.ticket-distribution-slave.aes_secret_key}
+        initial-size: 5
+        min-idle: 20
+        max-active: 40
+        max-wait: 10000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        timeBetweenConnectErrorMillis: 30000
+        failFast: true
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 100
+        connectProperties:
+          connectTimeout: "3000"
+          socketTimeout: "30000"
+      distribution-history: # 分销历史数据备份库
+        url: ${db.ticket-distribution-history.url}
+        username: ${db.ticket-distribution-history.username3}
+        password: ${v.db.ticket-distribution-history.password3}
+        aes_secret_key:  ${v.db.ticket-distribution.aes_secret_key}
+        initial-size: 5
+        min-idle: 20
+        max-active: 40
+        max-wait: 10000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        timeBetweenConnectErrorMillis: 30000
+        failFast: true
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 100
+        connectProperties:
+          connectTimeout: "3000"
+          socketTimeout: "30000"
